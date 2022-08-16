@@ -27,6 +27,11 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 	@Autowired
 	OrikaObjectMapper orikaObjectMapper;
 
+	/**
+	 * This method saves the guest reservation
+	 * @param guestReservation
+	 * @return GuestReservationEntity 
+	 */
 	@Override
 	public GuestReservationEntity saveGuestReservation(GuestReservationDTO guestReservation) {
 		GuestReservationEntity guestReservationEn = new GuestReservationEntity();
@@ -34,6 +39,11 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 		return guestReservationRepo.save(guestReservationEn);
 	}
 
+	
+	
+	/**
+	 * @param id
+	 */
 	@Override
 	public void deleteGuestReservation(int id) {
 		Optional<GuestReservationEntity> guestReservationOp = guestReservationRepo.findById(id);
@@ -47,6 +57,9 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	@Override
 	public List<GuestReservationDTO> getAllGuestReservation() {
 		List<GuestReservationEntity> entityList = (List<GuestReservationEntity>) guestReservationRepo.findAll();
@@ -68,6 +81,10 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 		return guestReservationList;
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 */
 	@Override
 	public GuestReservationDTO getGuestReservationById(int id) {
 		GuestReservationDTO guestReservation = new GuestReservationDTO();
@@ -85,6 +102,12 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 		return guestReservation;
 	}
 
+	/**
+	 * @param reservationId
+	 * @param guestId
+	 * @return
+	 * @throws DuplicateEntryException
+	 */
 	@Override
 	public String guestReservationValidation(int reservationId, int guestId) throws DuplicateEntryException {
 		List<GuestReservationDTO> guestReservationList = new ArrayList<GuestReservationDTO>();
@@ -97,6 +120,12 @@ public class GuestReservationServiceImpl implements IGuestReservationService {
 		return "Entry Saved Sucessfully";
 	}
 
+	/**
+	 * @param id
+	 * @param start
+	 * @param pageSize
+	 * @return
+	 */
 	public List<GuestReservationDTO> getGuestReservationByGuestId(int id,int start,int pageSize ) {
 		List<GuestReservationDTO> guestReservation = new ArrayList<GuestReservationDTO>();
 		List<GuestReservationEntity> guestReservationOp = guestReservationRepo.findByGuestId(id,PageRequest.of(start,pageSize,Sort.by(Direction.DESC,"guestReservationId")));

@@ -7,6 +7,11 @@ import com.rishi.userbooking.customexception.DuplicateEntryException;
 import com.rishi.userbooking.entity.GuestReservationEntity;
 
 public interface IGuestReservationService {
+	/**
+	 * This method saves the guest reservation
+	 * @param guestReservation
+	 * @return GuestReservationEntity 
+	 */
   public GuestReservationEntity saveGuestReservation(GuestReservationDTO guestReservation);
   public GuestReservationDTO getGuestReservationById(int  id);
   public String guestReservationValidation(int reservationId,int guestId) throws DuplicateEntryException ;
